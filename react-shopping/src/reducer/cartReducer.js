@@ -1,5 +1,3 @@
-import products from "../data/products";
-
 const CartReducer = (state, action) => {
   //กระบวนการจัดการ state ผ่าน action
   if (action.type === "CALCULATE_TOTAL") {
@@ -45,6 +43,21 @@ const CartReducer = (state, action) => {
         ...state,products:updateProduct
       }
   }
+
+  if (action.type === "SUBTRACT") {
+    let updateProduct = state.products.map((e) => {
+       if (e.id === action.payload) {
+         return {
+           ...e,
+           quantity: e.quantity - 1,
+         };
+       }
+       return e;
+     }).filter((e)=>e.quantity !== 0)
+     return{
+         ...state,products:updateProduct
+       }
+   }
 
  
 };

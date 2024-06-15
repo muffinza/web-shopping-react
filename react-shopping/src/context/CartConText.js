@@ -30,9 +30,13 @@ export const CartProvider =({children})=>{ //ตัวกระจายข้�
     function addQuantity(id){
         dispatch({type:"ADD",payload:id})
     }
+
+    function subtractQuantity(id){
+        dispatch({type:"SUBTRACT",payload:id})
+    }
    //กระจายข้อมูลไปให้ app component
    return (
-    <CartContext.Provider value={{...state,formatMoney,removeItem,addQuantity}} >  
+    <CartContext.Provider value={{...state,formatMoney,removeItem,addQuantity,subtractQuantity}} >  
         {children}  
     </CartContext.Provider>
    )
