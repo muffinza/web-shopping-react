@@ -1,7 +1,7 @@
 import { createContext,useContext,useReducer,useEffect } from "react";
 import products from "../data/products";
 import cartReducer from "../reducer/cartReducer"
-import { type } from "@testing-library/user-event/dist/type";
+
 //การสร้าง context
 const CartContext = createContext()
 
@@ -22,9 +22,17 @@ export const CartProvider =({children})=>{ //ตัวกระจายข้�
    function formatMoney(money){
     return money.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
     }
+
+    function removeItem(id){
+        dispatch({type:"REMOVE",payload:id})
+    }
+
+    function addQuantity(id){
+        dispatch({type:"ADD",payload:id})
+    }
    //กระจายข้อมูลไปให้ app component
    return (
-    <CartContext.Provider value={{...state,formatMoney}} >  
+    <CartContext.Provider value={{...state,formatMoney,removeItem,addQuantity}} >  
         {children}  
     </CartContext.Provider>
    )
